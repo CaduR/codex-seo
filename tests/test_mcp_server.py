@@ -32,6 +32,18 @@ class McpServerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             mcp_server.build_run_argv("content_quality.py", ["C:/Users/private.txt"])
 
+    def test_local_text_cleanup_requires_supplied_text(self):
+        with self.assertRaises(ValueError):
+            mcp_server.build_run_argv("content_humanize.py", ["draft.md", "--json"])
+
+    def test_draft_only_and_public_profile_checks_are_exposed_without_write_flags(self):
+        self.assertIn("agentic_fix.py", mcp_server.SAFE_SCRIPTS)
+        self.assertIn("ucp_check.py", mcp_server.SAFE_SCRIPTS)
+        with self.assertRaises(ValueError):
+            mcp_server.build_run_argv("agentic_fix.py", ["llms", "https://example.com", "--output", "draft.md"])
+        with self.assertRaises(ValueError):
+            mcp_server.build_run_argv("ucp_check.py", ["https://example.com", "--probe-endpoints"])
+
     def test_invalid_tool_arguments_return_invalid_params(self):
         reply = mcp_server.handle(
             {"jsonrpc": "2.0", "id": 4, "method": "tools/call", "params": {"name": "seo_doctor", "arguments": []}}

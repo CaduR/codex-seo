@@ -9,7 +9,7 @@ Identify the user's outcome and route to the most specific skill:
 
 - Broad site review: `seo-audit`
 - Technical, page, content or brief, schema, image: `seo-technical`, `seo-page`, `seo-content`, `seo-content-brief`, `seo-schema`, `seo-images`
-- AI search, agents, local/maps, international, sitemap: `seo-geo`, `seo-agentic`, `seo-local`, `seo-maps`, `seo-international`, `seo-sitemap`
+- AI search, agents, local/maps, international, sitemap: `seo-geo`, `seo-agentic`, `seo-local`, `seo-maps`, `seo-hreflang`, `seo-sitemap`
 - Strategy, programmatic, comparison pages, clusters, FLOW, SXO: `seo-plan`, `seo-programmatic`, `seo-competitor-pages`, `seo-cluster`, `seo-flow`, `seo-sxo`
 - Backlinks, Google data, DataForSEO, drift, commerce, image creation: `seo-backlinks`, `seo-google`, `seo-dataforseo`, `seo-drift`, `seo-ecommerce`, `seo-image-gen`
 

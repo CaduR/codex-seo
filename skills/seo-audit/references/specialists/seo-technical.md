@@ -26,7 +26,7 @@ See the AI Crawler Management section in `seo-technical` skill for crawler token
 
 ## Cross-Skill Delegation
 
-- For detailed hreflang validation, defer to the `seo-international` sub-skill.
+- For detailed hreflang validation, defer to the `seo-hreflang` sub-skill.
 
 ## Output Format
 

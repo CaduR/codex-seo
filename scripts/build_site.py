@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import html
+import posixpath
 import re
 from pathlib import Path
+from urllib.parse import quote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
@@ -22,14 +24,53 @@ def read_skill(path: Path) -> dict[str, str]:
     return {**fields, "title": title, "body": body.strip(), "slug": fields["name"]}
 
 
-def markdown(source: str) -> str:
+def markdown(source: str, skill_slug: str = "") -> str:
     out, paragraph, listing, code = [], [], None, False
 
     def inline(text: str) -> str:
         text = html.escape(text)
-        text = re.sub(r"`([^`]+)`", r"<code>\1</code>", text)
+        codes = []
+
+        def save_code(match: re.Match[str]) -> str:
+            codes.append("<code>" + match.group(1) + "</code>")
+            return f"\x00{len(codes) - 1}\x00"
+
+        text = re.sub(r"`([^`]+)`", save_code, text)
         text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
-        return re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", text)
+        text = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", text)
+
+        def link(match: re.Match[str]) -> str:
+            label, escaped_url = match.groups()
+            url = html.unescape(escaped_url)
+            parts = urlsplit(url)
+            if not parts.scheme and url.startswith("/") and not url.startswith("//"):
+                url = "/codex-seo" + url
+            elif not parts.scheme and not url.startswith("#"):
+                repo_path = posixpath.normpath(posixpath.join("skills", skill_slug, url))
+                if repo_path.startswith("docs/"):
+                    url = "/codex-seo/" + repo_path.removeprefix("docs/")
+                else:
+                    url = "https://github.com/CaduR/codex-seo/blob/main/" + quote(repo_path, safe="/")
+                parts = urlsplit(url)
+            safe = parts.scheme in {"http", "https", "mailto"} or url.startswith("/codex-seo/") or url.startswith("#")
+            if not safe:
+                return label
+            href = html.escape(url, quote=True)
+            external = parts.scheme in {"http", "https"}
+            attrs = ' target="_blank" rel="noopener noreferrer"' if external else ""
+            return f'<a href="{href}"{attrs}>{label}</a>'
+
+        text = re.sub(r"\[([^\]]+)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)", link, text)
+        for index, value in enumerate(codes):
+            text = text.replace(f"\x00{index}\x00", value)
+        return text
+
+    def table_cells(line: str) -> list[str]:
+        return [cell.strip() for cell in line.strip().strip("|").split("|")]
+
+    def is_table_rule(line: str) -> bool:
+        cells = table_cells(line)
+        return len(cells) > 1 and all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells)
 
     def flush_paragraph() -> None:
         if paragraph:
@@ -42,7 +83,10 @@ def markdown(source: str) -> str:
             out.append(f"</{listing}>")
             listing = None
 
-    for line in source.splitlines():
+    lines = source.splitlines()
+    index = 0
+    while index < len(lines):
+        line = lines[index]
         if line.startswith("```"):
             flush_paragraph(); flush_list()
             out.append("<pre><code>" if not code else "</code></pre>")
@@ -51,6 +95,29 @@ def markdown(source: str) -> str:
             out.append(html.escape(line) + "\n")
         elif not line.strip():
             flush_paragraph(); flush_list()
+        elif line.startswith(">"):
+            flush_paragraph(); flush_list()
+            quoted = []
+            while index < len(lines) and lines[index].startswith(">"):
+                quoted.append(lines[index].lstrip("> "))
+                index += 1
+            out.append("<blockquote><p>" + inline(" ".join(quoted)) + "</p></blockquote>")
+            continue
+        elif index + 1 < len(lines) and "|" in line and is_table_rule(lines[index + 1]):
+            flush_paragraph(); flush_list()
+            headers = table_cells(line)
+            out.append("<table><thead><tr>" + "".join(f"<th>{inline(cell)}</th>" for cell in headers) + "</tr></thead><tbody>")
+            index += 2
+            while index < len(lines) and "|" in lines[index] and lines[index].strip():
+                cells = table_cells(lines[index])
+                cells += [""] * max(0, len(headers) - len(cells))
+                out.append("<tr>" + "".join(f"<td>{inline(cell)}</td>" for cell in cells[:len(headers)]) + "</tr>")
+                index += 1
+            out.append("</tbody></table>")
+            continue
+        elif re.fullmatch(r"\s*(?:---+|\*\*\*+|___+)\s*", line):
+            flush_paragraph(); flush_list()
+            out.append("<hr>")
         elif line.startswith("#"):
             flush_paragraph(); flush_list()
             level = min(len(line) - len(line.lstrip("#")), 4)
@@ -64,7 +131,13 @@ def markdown(source: str) -> str:
             item = re.sub(r"^\s*(?:[-*+]|\d+[.)])\s+", "", line)
             out.append(f"<li>{inline(item)}</li>")
         else:
+            if listing and line[:1].isspace() and out and out[-1].endswith("</li>"):
+                out[-1] = out[-1][:-5] + " " + inline(line.strip()) + "</li>"
+                index += 1
+                continue
+            flush_list()
             paragraph.append(line)
+        index += 1
     flush_paragraph(); flush_list()
     if code:
         out.append("</code></pre>")
@@ -88,7 +161,7 @@ def build() -> None:
     for i, skill in enumerate(skills, 1):
         slug, title, desc = skill["slug"], skill["title"], skill["description"]
         cards.append(f'''<a class="skill-card" href="skills/{html.escape(slug)}/" data-search="{html.escape((slug + ' ' + title + ' ' + desc).lower(), quote=True)}"><span class="card-no">{i:02}</span><span class="card-title">{html.escape(title)}</span><span class="card-desc">{html.escape(desc)}</span><span class="card-link">Explorar workflow <b>↗</b></span></a>''')
-        detail = f'''<header class="top"><a class="brand" href="/codex-seo/"><span class="brand-mark">C</span> CODEX <b>SEO</b></a><nav><a href="/codex-seo/#catalogo">CATÁLOGO</a><a href="/codex-seo/#instalar">INSTALAÇÃO</a><a href="https://github.com/CaduR/codex-seo">GITHUB ↗</a></nav></header><main><div class="detail-hero"><a class="crumb" href="/codex-seo/#catalogo">← TODAS AS SKILLS</a><span class="eyebrow">WORKFLOW {i:02} / 26</span><h1>{html.escape(title)}</h1><p class="lead">{html.escape(desc)}</p><div class="detail-tags"><span>SKILL CODEX</span><span>OPEN SOURCE · MIT</span><span>SEM API PAGA OBRIGATÓRIA</span></div></div><section class="detail-grid"><div class="detail-main"><div class="section-kicker">// COMO USAR</div><h2>Workflow no Codex</h2><p>Peça ao Codex para usar <code>${html.escape(slug)}</code> com a URL, página, assunto ou conjunto de dados relevante. Veja as ferramentas expostas e dependências desta skill no <a href="/codex-seo/CAPABILITY-MAP.md">mapa de capacidades</a>.</p><article class="workflow">{markdown(skill["body"])}</article></div><aside class="detail-aside"><div class="section-kicker">// LIMITES</div><h3>O que esperar</h3><p>As recomendações devem ser ligadas a evidências observadas. Se uma página, conta ou fonte de dados não estiver acessível, o resultado precisa indicar essa limitação.</p><p>Dados do Google, backlinks, posições e buscas atuais não são presumidos. Conexões de terceiros podem exigir conta, permissão e custos próprios.</p><a class="button button-orange" href="/codex-seo/#instalar">INSTALAR O CODEX SEO ↗</a></aside></section><section class="next"><span class="section-kicker">// CONTINUE</span><h2>Explore as outras skills</h2><a href="/codex-seo/#catalogo">Voltar ao catálogo →</a></section></main><footer><span>CODEX SEO · MIT LICENSE</span><a href="https://github.com/CaduR/codex-seo">GITHUB ↗</a></footer>'''
+        detail = f'''<header class="top"><a class="brand" href="/codex-seo/"><span class="brand-mark">C</span> CODEX <b>SEO</b></a><nav><a href="/codex-seo/#catalogo">CATÁLOGO</a><a href="/codex-seo/#instalar">INSTALAÇÃO</a><a href="https://github.com/CaduR/codex-seo">GITHUB ↗</a></nav></header><main><div class="detail-hero"><a class="crumb" href="/codex-seo/#catalogo">← TODAS AS SKILLS</a><span class="eyebrow">WORKFLOW {i:02} / 26</span><h1>{html.escape(title)}</h1><p class="lead">{html.escape(desc)}</p><div class="detail-tags"><span>SKILL CODEX</span><span>OPEN SOURCE · MIT</span><span>SEM API PAGA OBRIGATÓRIA</span></div></div><section class="detail-grid"><div class="detail-main"><div class="section-kicker">// COMO USAR</div><h2>Workflow no Codex</h2><p>Peça ao Codex para usar <code>${html.escape(slug)}</code> com a URL, página, assunto ou conjunto de dados relevante. Veja as ferramentas expostas e dependências desta skill no <a href="/codex-seo/CAPABILITY-MAP.md">mapa de capacidades</a>.</p><article class="workflow">{markdown(skill["body"], slug)}</article></div><aside class="detail-aside"><div class="section-kicker">// LIMITES</div><h3>O que esperar</h3><p>As recomendações devem ser ligadas a evidências observadas. Se uma página, conta ou fonte de dados não estiver acessível, o resultado precisa indicar essa limitação.</p><p>Dados do Google, backlinks, posições e buscas atuais não são presumidos. Conexões de terceiros podem exigir conta, permissão e custos próprios.</p><a class="button button-orange" href="/codex-seo/#instalar">INSTALAR O CODEX SEO ↗</a></aside></section><section class="next"><span class="section-kicker">// CONTINUE</span><h2>Explore as outras skills</h2><a href="/codex-seo/#catalogo">Voltar ao catálogo →</a></section></main><footer><span>CODEX SEO · MIT LICENSE</span><a href="https://github.com/CaduR/codex-seo">GITHUB ↗</a></footer>'''
         (skills_dir / slug).mkdir(exist_ok=True)
         (skills_dir / slug / "index.html").write_text(page(title, desc, detail, f"{BASE}/skills/{slug}/"), encoding="utf-8")
 
