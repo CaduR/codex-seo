@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-seo",
+  "version": "0.1.0",
+  "description": "Practical SEO workflows for technical audits, pages, content, structured data, local search, international sites, and sitemaps.",
+  "repository": "https://github.com/CaduR/codex-seo",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Codex SEO",
+    "shortDescription": "Practical SEO audits and guidance",
+    "longDescription": "A set of focused SEO skills for reviewing websites and planning improvements. Covers technical SEO, individual pages, content quality, structured data, local and international SEO, and XML sitemaps. Recommendations distinguish observed evidence from assumptions. Core workflows do not require paid SEO APIs; optional data sources are used only when the user provides access.",
+    "developerName": "CaduR",
+    "category": "Productivity",
+    "capabilities": ["SEO audits", "Technical SEO", "Content optimization", "Structured data", "Local SEO", "International SEO"]
+  }
+}
