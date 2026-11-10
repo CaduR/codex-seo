@@ -21,3 +21,4 @@ Identify the user's outcome and route to the most specific skill:
 - Prioritize indexing blockers and broken experiences, then high-impact page and content fixes, then refinements. Never invent ranking guarantees or numerical scores.
 - Do not change a site, submit URLs, access analytics, or spend provider credits unless the user requests the action and access is available.
 - Paid SEO data is optional. State when a recommendation depends on an unavailable source and continue with free evidence where useful.
+- For runtime diagnostics, call `seo_doctor` only when local analysis tools are needed. Call `seo_setup` only after the user explicitly requests installing the local dependencies; it downloads packages into an isolated user-data environment.

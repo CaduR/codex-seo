@@ -7,6 +7,8 @@ description: Review technical SEO issues such as crawlability, indexability, can
 
 Inspect the available page, source, headers, and site files. If a live check is unavailable, say which checks remain unverified.
 
+When the local MCP runtime is ready, use `seo_analyze` with `render_page.py` for a URL, `sitemap_discovery.py` for public robots/sitemap declarations, and `agentic_check.py` for agent access. Search Console, CrUX, and PageSpeed API calls are not included in the default MCP tools; use supplied reports or another explicitly authorized tool.
+
 Check relevant items: HTTP status and redirect destination; robots.txt and meta/X-Robots-Tag directives; canonical URL; indexable page content and internal discovery; HTTPS and mixed content; mobile layout; Core Web Vitals or credible field data when available; and sitemap references. Follow robots rules and do not run aggressive crawls.
 
 Report each issue with the observed evidence, affected URL(s), likely impact, priority, and smallest practical fix. Separate measured performance from visual estimates. Do not infer Google indexing or rankings from a successful HTTP response.

@@ -7,4 +7,6 @@ description: Inspect, validate, or draft Schema.org structured data for a page o
 
 Inspect supplied or accessible JSON-LD, Microdata, or RDFa. Validate syntax, vocabulary types, required properties for the intended use, URL/date formats, and agreement with visible page content. Check current search-engine feature requirements when the response depends on them.
 
+When available, use `seo_analyze` with `schema_generate.py` to draft supported JSON-LD and `schema_ecommerce_validate.py` for product-related checks. These utilities do not establish eligibility for a rich result.
+
 When drafting JSON-LD, use only facts present on the page or supplied by the user; mark required missing facts instead of guessing. Explain that valid markup does not guarantee a rich result or ranking change. Return a minimal corrected example and identify where it belongs when asked to fix markup.

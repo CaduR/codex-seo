@@ -5,6 +5,8 @@ description: Assess a site's backlink evidence and identify relevant authority, 
 
 # Backlink review
 
+The default MCP does not expose backlink-provider scripts. Use supplied reports or a separately authorized provider connection; never infer backlink counts, authority scores, or toxic-link status from page content alone.
+
 Use only a dated, attributable source: Search Console export, Bing Webmaster data, a user-supplied file, or an explicitly connected link-data provider. State source, extraction date, target domain, and known coverage. Search engines expose different subsets, so do not describe one export as the complete web graph.
 
 Review referring domains and pages, anchor context, link relevance, obvious editorial patterns, redirects, and competitor gaps only when comparable evidence exists. Separate observed unnatural patterns from conclusions about intent. Do not label a link “toxic” or recommend disavowal solely from a vendor score; explain uncertainty and consult current Google guidance before destructive action.

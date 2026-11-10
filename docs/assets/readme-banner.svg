@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="410" viewBox="0 0 1200 410" role="img" aria-labelledby="title desc">
+  <title id="title">Codex SEO — seu time de SEO no Codex</title>
+  <desc id="desc">26 SEO skills, 19 specialist role cards, and local analysis tools for Codex.</desc>
+  <defs>
+    <linearGradient id="glow" x1="1" y1="0" x2="0" y2="1"><stop stop-color="#ef7048" stop-opacity=".3"/><stop offset="1" stop-color="#ef7048" stop-opacity="0"/></linearGradient>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern>
+  </defs>
+  <rect width="1200" height="410" rx="12" fill="#101010"/>
+  <rect width="1200" height="410" rx="12" fill="url(#grid)"/>
+  <rect width="1200" height="5" rx="2" fill="#ef7048"/>
+  <circle cx="1010" cy="156" r="185" fill="url(#glow)"/>
+  <circle cx="1010" cy="156" r="135" fill="none" stroke="#ef7048" stroke-opacity=".34"/>
+  <circle cx="1010" cy="156" r="166" fill="none" stroke="#ef7048" stroke-opacity=".12"/>
+  <g transform="translate(822 91) rotate(-4 163 109)">
+    <rect width="326" height="218" rx="7" fill="#171717" stroke="#49433f"/>
+    <path d="M0 34h326" stroke="#3c3936"/>
+    <circle cx="17" cy="17" r="4" fill="#ef7048"/><circle cx="31" cy="17" r="4" fill="#69635d"/><circle cx="45" cy="17" r="4" fill="#69635d"/>
+    <text x="289" y="21" fill="#9d9891" font-family="monospace" font-size="9" text-anchor="end">SEO / AUDIT</text>
+    <rect x="22" y="56" width="153" height="6" rx="3" fill="#6c5145"/>
+    <rect x="22" y="73" width="109" height="5" rx="2" fill="#3f3a36"/>
+    <rect x="22" y="87" width="132" height="5" rx="2" fill="#3f3a36"/>
+    <text x="269" y="109" fill="#ef7048" font-family="monospace" font-size="42" font-weight="700" text-anchor="middle">26</text>
+    <text x="269" y="128" fill="#d2cbc4" font-family="monospace" font-size="8" text-anchor="middle">SEO WORKFLOWS</text>
+    <g transform="translate(22 157)"><path d="M0 45h282" stroke="#4b4540"/><rect x="0" y="27" width="24" height="18" fill="#81432f"/><rect x="35" y="13" width="24" height="32" fill="#ba5b3d"/><rect x="70" y="21" width="24" height="24" fill="#85472f"/><rect x="105" y="7" width="24" height="38" fill="#ef7048"/><rect x="140" y="18" width="24" height="27" fill="#85472f"/><rect x="175" y="0" width="24" height="45" fill="#ff9a6f"/><rect x="210" y="15" width="24" height="30" fill="#ad593b"/><rect x="245" y="9" width="24" height="36" fill="#d46a46"/></g>
+  </g>
+  <text x="80" y="91" fill="#ef7048" font-family="monospace" font-size="13" letter-spacing="2">OPEN SOURCE · MIT · V0.3.0</text>
+  <text x="77" y="179" fill="#f3f0eb" font-family="Arial,sans-serif" font-size="59" font-weight="800" letter-spacing="-3">YOUR SEO TEAM</text>
+  <text x="77" y="244" fill="#ef7048" font-family="Arial,sans-serif" font-size="59" font-weight="800" letter-spacing="-3">IN CODEX.</text>
+  <text x="80" y="292" fill="#c4beb7" font-family="Arial,sans-serif" font-size="17">26 focused workflows. Local tools. Evidence-first recommendations.</text>
+  <rect x="80" y="327" width="405" height="45" rx="4" fill="#1b1b1b" stroke="#4b403a"/>
+  <rect x="80" y="327" width="3" height="45" fill="#ef7048"/>
+  <text x="98" y="355" fill="#ef7048" font-family="monospace" font-size="12">$</text>
+  <text x="118" y="355" fill="#f0eee9" font-family="monospace" font-size="12">codex plugin marketplace add CaduR/codex-seo</text>
+</svg>

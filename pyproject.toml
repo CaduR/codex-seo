@@ -1,0 +1,17 @@
+[project]
+name = "codex-seo"
+version = "0.3.0"
+description = "SEO workflow skills and local analysis tools for Codex"
+requires-python = ">=3.11,<3.15"
+license = "MIT"
+readme = "README.md"
+authors = [{ name = "CaduR" }]
+keywords = ["seo", "codex", "schema", "content", "technical-seo"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]

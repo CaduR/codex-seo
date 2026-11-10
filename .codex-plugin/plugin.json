@@ -1,10 +1,13 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-seo",
-  "version": "0.2.0",
-  "description": "A collection of 26 focused SEO workflows for audits, content, technical issues, structured data, local search, and search visibility.",
+  "version": "0.3.0",
+  "description": "26 Codex SEO workflows with a local, allowlisted analysis runtime.",
   "repository": "https://github.com/CaduR/codex-seo",
   "skills": "./skills/",
+  "mcpServers": "./mcp.json",
+  "requires_local_executor": true,
+  "onboardingSkill": "./skills/seo/SKILL.md",
   "interface": {
     "displayName": "Codex SEO",
     "shortDescription": "26 focused SEO workflows for Codex",
