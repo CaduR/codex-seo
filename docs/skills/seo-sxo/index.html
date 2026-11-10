@@ -147,11 +147,11 @@ but I&#x27;m blocked by [barrier derived from PAA questions / related searches].
 <li>Output as semantic HTML section outline with annotations</li>
 </ol>
 <h2>DataForSEO Integration</h2>
-<p>If DataForSEO MCP tools are available:</p>
+<p>If the <code>dataforseo</code> MCP is connected, use the <code>seo-dataforseo</code> workflow to resolve the current v3 endpoint with <code>docs_search</code>, show the cost estimate, and call <code>api_request</code> only after user approval.</p>
 <ol>
 <li><strong>Before any API call</strong>, run cost estimate and confirm with user</li>
-<li>Use <code>serp_organic_live_advanced</code> for precise SERP data (positions, features, snippets)</li>
-<li>Use <code>kw_data_google_ads_search_volume</code> for search volume and competition metrics</li>
+<li>Use <code>api_request</code> for precise SERP data (positions, features, snippets)</li>
+<li>Use <code>api_request</code> for search volume and competition metrics</li>
 <li>Fall back to WebSearch if DataForSEO unavailable -- note reduced precision in output</li>
 </ol>
 <h2>SXO Score vs SEO Health Score</h2>

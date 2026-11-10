@@ -21,9 +21,9 @@
 <h3>Tier 0 (Free)</h3>
 <p><strong>Detection:</strong> No DataForSEO MCP tool is exposed by the default plugin. <strong>Capabilities:</strong> Overpass API competitor discovery, Geoapify POI search, Nominatim geocoding, static GBP checklist, schema generation, cross-platform NAP guidance. <strong>Load:</strong> <code>../seo/references/maps-free-apis.md</code></p>
 <h3>Tier 1 (DataForSEO)</h3>
-<p><strong>Detection:</strong> <code>business_data_business_listings_search</code> MCP tool IS available. <strong>Capabilities:</strong> Everything in Tier 0 PLUS geo-grid rank tracking, live GBP profile audit, review intelligence (velocity, sentiment, distribution), GBP post activity, Q&amp;A data, Tripadvisor/Trustpilot reviews. <strong>Load:</strong> <code>../seo/references/maps-api-endpoints.md</code></p>
+<p><strong>Detection:</strong> The connected server named <code>dataforseo</code> exposes the generic <code>api_request</code> tool; use <code>docs_search</code> to identify the current endpoint. <strong>Capabilities:</strong> Everything in Tier 0 PLUS geo-grid rank tracking, live GBP profile audit, review intelligence (velocity, sentiment, distribution), GBP post activity, Q&amp;A data, Tripadvisor/Trustpilot reviews. <strong>Load:</strong> <code>../seo/references/maps-api-endpoints.md</code></p>
 <h3>Tier 2 (DataForSEO + Google Maps Platform)</h3>
-<p><strong>Detection:</strong> Tier 1 available AND Google Maps API key in environment. <strong>Capabilities:</strong> Everything in Tier 1 PLUS Google Places details, real-time business status, AI-powered place summaries, photo analysis. <strong>Note:</strong> Google ToS restricts storage to <code>place_id</code> only. Lat/lng cached 30 days max.</p>
+<p><strong>Detection:</strong> Tier 1 is connected and a separately authorized Google Maps Platform tool is available. Do not inspect environment variables or infer credential availability. <strong>Capabilities:</strong> Everything in Tier 1 PLUS Google Places details, real-time business status, AI-powered place summaries, photo analysis. <strong>Note:</strong> Google ToS restricts storage to <code>place_id</code> only. Lat/lng cached 30 days max.</p>
 <p><strong>Always communicate the detected tier to the user</strong> at the start of analysis.</p>
 <hr>
 <h2>Geo-Grid Rank Tracking (Tier 1+)</h2>

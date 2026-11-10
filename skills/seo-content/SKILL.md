@@ -223,7 +223,7 @@ drawing conclusions. A date overlap is a hypothesis, never proof of cause.
 
 ## DataForSEO Integration (Optional)
 
-If DataForSEO MCP tools are available, use `kw_data_google_ads_search_volume` for real keyword volume data, `dataforseo_labs_bulk_keyword_difficulty` for difficulty scores, `dataforseo_labs_search_intent` for intent classification, and `content_analysis_summary` for content quality analysis.
+If the `dataforseo` MCP is connected, use the `seo-dataforseo` workflow to resolve the current v3 endpoint with `docs_search`, show the cost estimate, and call `api_request` only after user approval.
 
 ## Error Handling
 

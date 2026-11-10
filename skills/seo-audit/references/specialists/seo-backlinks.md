@@ -30,7 +30,7 @@ You are a backlink profile analyst. When delegated tasks during an SEO audit:
   DataForSEO, or Common Crawl when the second property is not registered.
 
 ### Tier 3 (+ DataForSEO, Premium)
-- If DataForSEO MCP tools are available, use them for highest-fidelity data
+If the `dataforseo` MCP is connected, use the `seo-dataforseo` workflow to resolve the current v3 endpoint with `docs_search`, show the cost estimate, and call `api_request` only after user approval.
 - DataForSEO data gets **confidence: 1.00**
 - Combine with free source data for cross-validation
 - When DataForSEO and Moz disagree, trust DataForSEO but note the discrepancy
@@ -87,7 +87,7 @@ If any check fails, fix the report before returning it.
 - If Moz rate-limits mid-analysis, return partial data and note "rate_limited: true"
 - If Common Crawl download times out, skip CC metrics and note the timeout
 - Never fail silently, always report what succeeded and what failed
-- If all free sources fail, suggest DataForSEO extension: `./extensions/dataforseo/install.sh`
+- If paid backlink data is needed, offer the optional DataForSEO OAuth setup in `docs/EXTENSIONS.md`; resolve the v3 endpoint and cost before asking approval.
 
 ## Fetching pages (v2.0.0)
 

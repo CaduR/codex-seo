@@ -83,7 +83,7 @@ Ready-to-use JSON-LD code for detected opportunities
 
 ## DataForSEO Integration (Optional)
 
-If DataForSEO MCP tools are available, use `serp_organic_live_advanced` for real SERP positions and `backlinks_summary` for backlink data and spam scores.
+If the `dataforseo` MCP is connected, use the `seo-dataforseo` workflow to resolve the current v3 endpoint with `docs_search`, show the cost estimate, and call `api_request` only after user approval.
 
 ## Error Handling
 

@@ -57,7 +57,7 @@ You are a Local SEO specialist. When given a URL:
 
 ## DataForSEO Integration (Optional)
 
-If DataForSEO MCP tools are available, use `business_data_business_listings_search` for live GBP/business-listing data and `serp_organic_live_advanced` for real-time local pack positions.
+If the `dataforseo` MCP is connected, use the `seo-dataforseo` workflow to resolve the current v3 endpoint with `docs_search`, show the cost estimate, and call `api_request` only after user approval.
 
 ## Output Format
 

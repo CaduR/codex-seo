@@ -195,9 +195,7 @@ When DataForSEO MCP is available, enhance the image audit with competitive data.
 Cross-reference on-page images with the image results visible in the Google SERP.
 
 **Workflow:**
-1. The pinned DataForSEO MCP server (2.8.10) has no Google Images SERP tool.
-   Use the `images` element of `serp_organic_live_advanced` (depth=100) when the
-   SERP has one, and say plainly when no image SERP data is available
+1. If the user requests paid competitor image data, resolve the separate Google Images endpoint with `docs_search`, show the estimate, get approval, and query with `api_request`. If unavailable, say image SERP data was not checked.
 2. Extract: top domains, image types, alt text patterns
 3. Output competitor image SERP landscape
 

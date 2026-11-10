@@ -2,6 +2,8 @@
 
 Live SEO data via the [DataForSEO MCP server](https://github.com/dataforseo/mcp-server-typescript). Adds 23 data commands across 9 API modules: SERP analysis, keyword research, backlinks, on-page analysis, competitor analysis, content analysis, business listings, AI visibility checking, and LLM mention tracking.
 
+> **Codex:** this README and the adjacent `install.sh` / `install.ps1` are upstream Claude Code materials. Do not run those installers for Codex. To connect the current official DataForSEO v3 MCP, use the OAuth instructions in [`docs/EXTENSIONS.md`](../../docs/EXTENSIONS.md#connect-dataforseo-to-codex). Its API is billable; get explicit approval for each live query.
+
 ## Prerequisites
 
 - [Claude SEO](https://github.com/AgriciDaniel/claude-seo) installed

@@ -106,7 +106,7 @@
 <li>Risk mitigation strategies</li>
 </ul>
 <h2>DataForSEO Integration (Optional)</h2>
-<p>If DataForSEO MCP tools are available, use <code>dataforseo_labs_google_competitors_domain</code> and <code>dataforseo_labs_google_domain_intersection</code> for real competitive intelligence, <code>dataforseo_labs_bulk_traffic_estimation</code> for traffic estimates, <code>kw_data_google_ads_search_volume</code> and <code>dataforseo_labs_bulk_keyword_difficulty</code> for keyword research, and <code>business_data_business_listings_search</code> for local business data.</p>
+<p>If the <code>dataforseo</code> MCP is connected, use the <code>seo-dataforseo</code> workflow to resolve the current v3 endpoint with <code>docs_search</code>, show the cost estimate, and call <code>api_request</code> only after user approval.</p>
 <h2>Error Handling</h2>
 <table><thead><tr><th>Scenario</th><th>Action</th></tr></thead><tbody>
 <tr><td>Unrecognized business type</td><td>Fall back to <code>generic.md</code> template. Inform user that no industry-specific template was found and proceed with the general business template.</td></tr>

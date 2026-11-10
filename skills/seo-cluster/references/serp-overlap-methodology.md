@@ -12,7 +12,7 @@ content architecture rather than relying on keyword text similarity or stemming.
 ### Step 1: Collect SERP Data
 
 For each keyword in the candidate set, retrieve the top 10 organic results:
-- Use WebSearch or DataForSEO `serp_organic_live_advanced`
+- Use WebSearch or DataForSEO `api_request`
 - Extract only organic result URLs (ignore ads, featured snippets, PAA, knowledge panels)
 - Normalize URLs: strip protocol, trailing slash, and query parameters (except meaningful ones)
 - Store as a set of 10 URLs per keyword
@@ -96,8 +96,7 @@ Diagonal is always 10 (a keyword overlaps perfectly with itself).
 
 ## Data Source Priority
 
-1. **DataForSEO** (if available): Most reliable, consistent SERP data. Use
-   `serp_organic_live_advanced` with `location_code: 2840` (US) and `language_code: "en"`.
+1. **DataForSEO** (if connected and approved): Resolve the v3 SERP endpoint and market-specific location/language codes with `docs_search`; do not assume US/English. Call `api_request` only after showing the current estimate and receiving approval.
 2. **WebSearch** (fallback): Adequate for clustering but results may vary by session.
    Run multiple searches for the same keyword and use the most common result set.
 

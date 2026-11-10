@@ -13,7 +13,7 @@ This workflow preserves the source project's audit criteria while adapting execu
 
 1. **Render the homepage**: call `seo_analyze` with `render_page.py` to inspect public HTML and extracted content. Browser rendering depends on the optional local browser runtime.
 2. **Classify the business** from visible homepage evidence and the user's description. Mark uncertain classifications as assumptions.
-3. **Set site coverage**: use `sitemap_discovery.py`, then review the homepage and a representative set of important URLs with `render_page.py`. The default MCP does not crawl 500 pages; state exactly which URLs were inspected and respect robots.txt.
+3. **Set site coverage**: discover sitemaps and review important URLs with `render_page.py`. If the user explicitly requests a multi-page Lighthouse crawl, call `seo_crawl` with a route cap of at most 50; it requires Node.js 18+ and downloads the pinned Unlighthouse runner on first use. Respect robots.txt, state the route cap and actual coverage, and never imply that a bounded sample is a complete crawl of a large site.
 4. **Run specialist passes** using relevant skills and role cards. Delegate only when Codex provides subagent tools; otherwise review inline:
    - `seo-technical` -- robots.txt, sitemaps, canonicals, Core Web Vitals, security headers
    - `seo-content` -- E-E-A-T, readability, thin content, AI citation readiness

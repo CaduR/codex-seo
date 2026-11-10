@@ -40,7 +40,7 @@ Produce all 7 sections below. Each section lists data sources in preference orde
 
 ### 1. Profile Overview
 
-**DataForSEO:** `backlinks_summary` → total backlinks, referring domains, domain rank, follow ratio, trend.
+**DataForSEO:** `api_request` → total backlinks, referring domains, domain rank, follow ratio, trend.
 
 **Moz API:** `moz_api.py` (not available through the default Codex MCP) → Domain Authority, Page Authority, Spam Score, linking root domains, external links.
 
@@ -59,7 +59,7 @@ Produce all 7 sections below. Each section lists data sources in preference orde
 
 ### 2. Anchor Text Distribution
 
-**DataForSEO:** `backlinks_anchors`
+**DataForSEO:** `api_request`
 
 **Moz API:** `moz_api.py` (not available through the default Codex MCP)
 
@@ -80,7 +80,7 @@ Flag if exact-match anchors exceed 15% as a review heuristic; it may indicate un
 
 ### 3. Referring Domain Quality
 
-**DataForSEO:** `backlinks_referring_domains`
+**DataForSEO:** `api_request`
 
 **Moz API:** `moz_api.py` (not available through the default Codex MCP) → domains with DA scores
 
@@ -94,7 +94,7 @@ Analyze:
 
 ### 4. Toxic Link Detection
 
-**DataForSEO:** `backlinks_bulk_spam_score` + toxic patterns from reference
+**DataForSEO:** `api_request` + toxic patterns from reference
 
 **Moz API:** Raw vendor spam_score from `moz_api.py` (not available through the default Codex MCP) (source-label the value; apply thresholds only if verified against current Moz docs)
 
@@ -118,7 +118,7 @@ Load `../seo/references/backlink-quality.md` for the full 30 toxic patterns and 
 
 ### 5. Top Pages by Backlinks
 
-**DataForSEO:** `backlinks_backlinks` with target type "page"
+**DataForSEO:** `api_request` with target type "page"
 
 **Moz API:** `moz_api.py` (not available through the default Codex MCP)
 
@@ -130,7 +130,7 @@ Find:
 
 ### 6. Competitor Gap Analysis
 
-**DataForSEO:** `backlinks_referring_domains` for both domains, then compare
+**DataForSEO:** `api_request` for both domains, then compare
 
 **Bing Webmaster:** `bing_webmaster.py` (not available through the default Codex MCP)
 only when both properties are registered and accessible to the same Bing API
@@ -146,7 +146,7 @@ Output:
 
 ### 7. New and Lost Backlinks
 
-**DataForSEO only:** `backlinks_backlinks` with date filters for 30/60/90 day changes
+**DataForSEO only:** `api_request` with date filters for 30/60/90 day changes
 
 **Verification Crawler:** Current backlink status is not checked by the default MCP. Use only provider output or a link list reviewed with an available page-fetch tool.
 

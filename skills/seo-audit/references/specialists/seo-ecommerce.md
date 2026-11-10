@@ -12,21 +12,11 @@ When delegated tasks during an SEO audit or analysis:
 1. Detect e-commerce signals: product schema, price elements, add-to-cart buttons,
    shopping cart, product grids, Shopify/WooCommerce/Magento markers
 3. Validate Product schema against Google's required and recommended fields
-4. If DataForSEO credentials available, fetch marketplace data via
+4. If the authorized DataForSEO v3 MCP is connected and marketplace data is requested, resolve the endpoint and price with `docs_search`; use `api_request` only after user approval.
 
 ## Cost Guardrails
 
-Before ANY DataForSEO Merchant API call:
-```bash
-```
-
-Only proceed if `"status": "approved"`. If `"needs_approval"`, surface the cost
-to the parent orchestrator. If `"blocked"`, skip marketplace analysis and note
-the limitation.
-
-After each API call, log the cost:
-```bash
-```
+Before a paid DataForSEO request, resolve the current endpoint and concrete estimate with `docs_search`, state the estimate, and wait for explicit user approval. Do not inspect credentials or claim a call ran without the connected v3 `api_request` tool. Report the returned actual cost when the response includes it; there is no local spend ledger.
 
 ## Analysis Priorities
 

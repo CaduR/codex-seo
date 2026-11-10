@@ -73,13 +73,7 @@
 <h2>2. Google Shopping Intelligence (DataForSEO Merchant API)</h2>
 <p>Live competitive analysis from Google Shopping results.</p>
 <h3>Cost Guardrail (MANDATORY)</h3>
-<p>Before any paid Merchant/marketplace API call: The default plugin does not call DataForSEO or track spend. If a provider MCP is connected and the user requests paid data, show its concrete estimate and obtain approval before the smallest request. If no estimate is available, do not call it.</p>
-<ul>
-<li><code>&quot;status&quot;: &quot;approved&quot;</code> -- proceed</li>
-<li><code>&quot;status&quot;: &quot;needs_approval&quot;</code> -- show cost, ask user</li>
-<li><code>&quot;status&quot;: &quot;blocked&quot;</code> -- stop, inform user</li>
-</ul>
-<p>After each call: The default plugin does not call DataForSEO or track spend. If a provider MCP is connected and the user requests paid data, show its concrete estimate and obtain approval before the smallest request. If no estimate is available, do not call it.</p>
+<p>Before a paid provider call, use <code>docs_search</code> for the current v3 endpoint and concrete estimate, get explicit user approval, then call <code>api_request</code>. Report returned results and actual cost when available. Codex SEO has no local status ledger or budget-gate command.</p>
 <h3>Workflow</h3>
 <pre><code>
 # Product search: who sells what at what price
@@ -154,8 +148,8 @@
 <p>Identify mismatches between organic and Shopping visibility.</p>
 <h3>Workflow</h3>
 <ol>
-<li>Fetch organic rankings via seo-dataforseo: <code>dataforseo_labs_google_ranked_keywords</code> for domain</li>
-<li>Fetch Google Shopping presence through the Merchant REST script (not an MCP tool; the cost-ledger key is <code>merchant_google_products_search</code>): <code>dataforseo_merchant.py</code> (not available through the default Codex MCP) for the top organic keywords</li>
+<li>Fetch organic rankings via seo-dataforseo: <code>api_request</code> for domain</li>
+<li>Fetch Google Shopping presence through the Merchant REST script (not an MCP tool; the cost-ledger key is <code>api_request</code>): <code>dataforseo_merchant.py</code> (not available through the default Codex MCP) for the top organic keywords</li>
 <li>Cross-reference results</li>
 </ol>
 <h3>Gap Types</h3>

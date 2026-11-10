@@ -378,7 +378,7 @@ Generate `GEO-ANALYSIS.md` with:
 
 ## DataForSEO Integration (Optional)
 
-If DataForSEO MCP tools are available, use `ai_optimization_chat_gpt_scraper` to check what ChatGPT web search returns for target queries (real GEO visibility check) and `ai_opt_llm_ment_search` with `ai_opt_llm_ment_top_domains` for LLM mention tracking across AI platforms.
+If the `dataforseo` MCP is connected, use the `seo-dataforseo` workflow to resolve the current v3 endpoint with `docs_search`, show the cost estimate, and call `api_request` only after user approval.
 
 ## Error Handling
 

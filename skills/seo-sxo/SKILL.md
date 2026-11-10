@@ -152,11 +152,11 @@ Read `references/wireframe-templates.md` for templates.
 
 ## DataForSEO Integration
 
-If DataForSEO MCP tools are available:
+If the `dataforseo` MCP is connected, use the `seo-dataforseo` workflow to resolve the current v3 endpoint with `docs_search`, show the cost estimate, and call `api_request` only after user approval.
 
 1. **Before any API call**, run cost estimate and confirm with user
-2. Use `serp_organic_live_advanced` for precise SERP data (positions, features, snippets)
-3. Use `kw_data_google_ads_search_volume` for search volume and competition metrics
+2. Use `api_request` for precise SERP data (positions, features, snippets)
+3. Use `api_request` for search volume and competition metrics
 4. Fall back to WebSearch if DataForSEO unavailable -- note reduced precision in output
 
 ## SXO Score vs SEO Health Score

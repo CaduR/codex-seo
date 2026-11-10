@@ -221,7 +221,7 @@ When the user asks for "just an outline" or "content outline" instead of a full 
 
 ## DataForSEO Integration (Optional)
 
-If DataForSEO MCP tools are available, use `serp_organic_live_advanced` for real SERP data and competitor analysis, `kw_data_google_ads_search_volume` for keyword volume, `dataforseo_labs_bulk_keyword_difficulty` for difficulty scores, `dataforseo_labs_search_intent` for intent classification, and `on_page_content_parsing` for competitor content extraction.
+If the `dataforseo` MCP is connected, use the `seo-dataforseo` workflow to resolve the current v3 endpoint with `docs_search`, show the cost estimate, and call `api_request` only after user approval.
 
 ## Ahrefs Integration (Optional)
 

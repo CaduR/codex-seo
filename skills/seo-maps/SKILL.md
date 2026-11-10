@@ -43,12 +43,12 @@ Before any analysis, detect the available capability tier:
 **Load:** `../seo/references/maps-free-apis.md`
 
 ### Tier 1 (DataForSEO)
-**Detection:** `business_data_business_listings_search` MCP tool IS available.
+**Detection:** The connected server named `dataforseo` exposes the generic `api_request` tool; use `docs_search` to identify the current endpoint.
 **Capabilities:** Everything in Tier 0 PLUS geo-grid rank tracking, live GBP profile audit, review intelligence (velocity, sentiment, distribution), GBP post activity, Q&A data, Tripadvisor/Trustpilot reviews.
 **Load:** `../seo/references/maps-api-endpoints.md`
 
 ### Tier 2 (DataForSEO + Google Maps Platform)
-**Detection:** Tier 1 available AND Google Maps API key in environment.
+**Detection:** Tier 1 is connected and a separately authorized Google Maps Platform tool is available. Do not inspect environment variables or infer credential availability.
 **Capabilities:** Everything in Tier 1 PLUS Google Places details, real-time business status, AI-powered place summaries, photo analysis.
 **Note:** Google ToS restricts storage to `place_id` only. Lat/lng cached 30 days max.
 

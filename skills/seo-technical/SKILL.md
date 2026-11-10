@@ -240,7 +240,7 @@ behind every score.
 
 ## DataForSEO Integration (Optional)
 
-If DataForSEO MCP tools are available, use `on_page_instant_pages` for real page analysis (status codes, page timing, broken links, on-page checks), `on_page_lighthouse` for Lighthouse audits (performance, accessibility, SEO scores), and `domain_analytics_technologies_domain_technologies` for technology stack detection.
+If the `dataforseo` MCP is connected, use the `seo-dataforseo` workflow to resolve the current v3 endpoint with `docs_search`, show the cost estimate, and call `api_request` only after user approval.
 
 ## Google API Integration (Optional)
 
@@ -250,10 +250,10 @@ If Google API credentials are configured, use `pagespeed_check.py` (not availabl
 
 `url_safety` refuses loopback and private addresses by default, so `http://localhost:3000` and a staging host on Tailscale fail with "Blocked hostname" or "Blocked IP literal". That default is deliberate: these scripts follow URLs found on the pages they crawl.
 
-To audit a pre-deployment host, the operator names it in `CLAUDE_SEO_LOCAL_TARGETS`, a comma-separated list of `host` or `host:port` entries:
+To audit a pre-deployment host, the operator names it in `CODEX_SEO_LOCAL_TARGETS`, a comma-separated list of `host` or `host:port` entries:
 
 ```bash
-CLAUDE_SEO_LOCAL_TARGETS="localhost:3000,127.0.0.1:8080,100.101.102.103" \
+CODEX_SEO_LOCAL_TARGETS="localhost:3000,127.0.0.1:8080,100.101.102.103" \
   # Codex MCP seo_analyze input: {"script": "fetch_page.py", "arguments": ["http://localhost:3000/"]}
 ```
 

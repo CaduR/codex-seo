@@ -183,7 +183,7 @@
 <p>Cross-reference on-page images with the image results visible in the Google SERP.</p>
 <p><strong>Workflow:</strong></p>
 <ol>
-<li>The pinned DataForSEO MCP server (2.8.10) has no Google Images SERP tool. Use the <code>images</code> element of <code>serp_organic_live_advanced</code> (depth=100) when the SERP has one, and say plainly when no image SERP data is available</li>
+<li>If the user requests paid competitor image data, resolve the separate Google Images endpoint with <code>docs_search</code>, show the estimate, get approval, and query with <code>api_request</code>. If unavailable, say image SERP data was not checked.</li>
 <li>Extract: top domains, image types, alt text patterns</li>
 <li>Output competitor image SERP landscape</li>
 </ol>

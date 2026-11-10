@@ -92,7 +92,7 @@
 </ul>
 <h2>Error Handling</h2>
 <table><thead><tr><th>Scenario</th><th>Action</th></tr></thead><tbody>
-<tr><td>PSI quota exceeded or no compatible runner</td><td>Continue with the available static checks and say the Lighthouse fraction was not measured. Do not claim a PSI call ran.</td></tr>
+<tr><td>PSI quota exceeded or no compatible Agentic Browsing runner</td><td>Continue with static checks and <code>seo_crawl</code> where the user explicitly requested a multi-page Lighthouse scan. State that the Agentic Browsing category fraction was not measured; <code>seo_crawl</code> does not provide that category.</td></tr>
 <tr><td>Agent-UX <code>score_status: unavailable</code> (no Chromium)</td><td>Report the heuristic as unavailable. Offer <code>seo_setup</code> for the optional Chromium runtime only if the user asks; this does not add the Lighthouse Agentic Browsing runner.</td></tr>
 <tr><td>Static WebMCP count differs from Lighthouse</td><td><code>registerTool_call_sites</code> counts call sites, not tools. Report the Lighthouse <code>webmcp-registered-tools</code> list as the tool count.</td></tr>
 <tr><td>No agentic-browsing category in a saved report</td><td>The report predates Lighthouse 13.2; rerun with a current version.</td></tr>

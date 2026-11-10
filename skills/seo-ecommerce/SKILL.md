@@ -87,15 +87,7 @@ Live competitive analysis from Google Shopping results.
 
 ### Cost Guardrail (MANDATORY)
 
-Before any paid Merchant/marketplace API call:
-The default plugin does not call DataForSEO or track spend. If a provider MCP is connected and the user requests paid data, show its concrete estimate and obtain approval before the smallest request. If no estimate is available, do not call it.
-
-- `"status": "approved"` -- proceed
-- `"status": "needs_approval"` -- show cost, ask user
-- `"status": "blocked"` -- stop, inform user
-
-After each call:
-The default plugin does not call DataForSEO or track spend. If a provider MCP is connected and the user requests paid data, show its concrete estimate and obtain approval before the smallest request. If no estimate is available, do not call it.
+Before a paid provider call, use `docs_search` for the current v3 endpoint and concrete estimate, get explicit user approval, then call `api_request`. Report returned results and actual cost when available. Codex SEO has no local status ledger or budget-gate command.
 
 ### Workflow
 
@@ -173,9 +165,9 @@ Identify mismatches between organic and Shopping visibility.
 ### Workflow
 
 1. Fetch organic rankings via seo-dataforseo:
-   `dataforseo_labs_google_ranked_keywords` for domain
+   `api_request` for domain
 2. Fetch Google Shopping presence through the Merchant REST script (not an
-   MCP tool; the cost-ledger key is `merchant_google_products_search`):
+   MCP tool; the cost-ledger key is `api_request`):
    `dataforseo_merchant.py` (not available through the default Codex MCP)
    for the top organic keywords
 3. Cross-reference results

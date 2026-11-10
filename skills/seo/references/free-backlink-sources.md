@@ -92,7 +92,7 @@ a report (`status: FAIL`) that carries a number in either case. See the
 
 ## When to Recommend DataForSEO Upgrade
 
-Suggest the paid DataForSEO extension when:
+Suggest connecting the paid DataForSEO v3 MCP through the Codex OAuth setup when:
 - User needs **toxic link detection** beyond Moz's basic Spam Score
 - User needs **competitor gap analysis** at scale or against an unregistered
   domain (Bing comparison is limited to properties accessible to the account)

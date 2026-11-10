@@ -188,14 +188,14 @@ Allow: /
 <h3>Medium Priority (fix within 1 month)</h3>
 <h3>Low Priority (backlog)</h3>
 <h2>DataForSEO Integration (Optional)</h2>
-<p>If DataForSEO MCP tools are available, use <code>on_page_instant_pages</code> for real page analysis (status codes, page timing, broken links, on-page checks), <code>on_page_lighthouse</code> for Lighthouse audits (performance, accessibility, SEO scores), and <code>domain_analytics_technologies_domain_technologies</code> for technology stack detection.</p>
+<p>If the <code>dataforseo</code> MCP is connected, use the <code>seo-dataforseo</code> workflow to resolve the current v3 endpoint with <code>docs_search</code>, show the cost estimate, and call <code>api_request</code> only after user approval.</p>
 <h2>Google API Integration (Optional)</h2>
 <p>If Google API credentials are configured, use <code>pagespeed_check.py</code> (not available through the default Codex MCP) for real PSI + CrUX field data (replaces lab-only CWV estimates), <code>crux_history.py</code> (not available through the default Codex MCP) for 25-week CWV trends (use PHONE: the all-devices view can hide a mobile failure), and <code>gsc_inspect.py</code> (not available through the default Codex MCP) for real indexation status per URL.</p>
 <h2>Auditing a Local or Private Host</h2>
 <p><code>url_safety</code> refuses loopback and private addresses by default, so <code>http://localhost:3000</code> and a staging host on Tailscale fail with &quot;Blocked hostname&quot; or &quot;Blocked IP literal&quot;. That default is deliberate: these scripts follow URLs found on the pages they crawl.</p>
-<p>To audit a pre-deployment host, the operator names it in <code>CLAUDE_SEO_LOCAL_TARGETS</code>, a comma-separated list of <code>host</code> or <code>host:port</code> entries:</p>
+<p>To audit a pre-deployment host, the operator names it in <code>CODEX_SEO_LOCAL_TARGETS</code>, a comma-separated list of <code>host</code> or <code>host:port</code> entries:</p>
 <pre><code>
-CLAUDE_SEO_LOCAL_TARGETS=&quot;localhost:3000,127.0.0.1:8080,100.101.102.103&quot; \
+CODEX_SEO_LOCAL_TARGETS=&quot;localhost:3000,127.0.0.1:8080,100.101.102.103&quot; \
 
   # Codex MCP seo_analyze input: {&quot;script&quot;: &quot;fetch_page.py&quot;, &quot;arguments&quot;: [&quot;http://localhost:3000/&quot;]}
 

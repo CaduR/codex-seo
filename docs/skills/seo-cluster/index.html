@@ -45,7 +45,7 @@
 <li>Only cross-check group boundary keywords</li>
 <li>Skip pairs where both are long-tail variants of the same head term (assume same cluster)</li>
 </ul>
-<p><strong>DataForSEO integration:</strong> If DataForSEO MCP is available, use <code>serp_organic_live_advanced</code> instead of WebSearch for SERP data. Use only a connected search/provider tool after any required user approval; otherwise treat overlap as a hypothesis and label the missing SERP evidence. before each batch. If <code>&quot;status&quot;: &quot;needs_approval&quot;</code>, show cost estimate and ask user. If <code>&quot;status&quot;: &quot;blocked&quot;</code>, fall back to WebSearch.</p>
+<p>If the <code>dataforseo</code> MCP is connected, use the <code>seo-dataforseo</code> workflow to resolve the current v3 SERP endpoint with <code>docs_search</code>; show the estimated cost and get approval before <code>api_request</code>. If it is unavailable or not approved, use WebSearch where available or label clustering as a semantic hypothesis.</p>
 <h3>Step 3: Intent Classification</h3>
 <p>Classify each keyword into one of four intent categories:</p>
 <table><thead><tr><th>Intent</th><th>Signals</th><th>Include in Clusters?</th></tr></thead><tbody>

@@ -2,7 +2,9 @@ import json
 import subprocess
 import sys
 import unittest
+from types import SimpleNamespace
 from pathlib import Path
+from unittest.mock import patch
 
 from scripts import mcp_server
 
@@ -44,6 +46,32 @@ class McpServerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             mcp_server.build_run_argv("ucp_check.py", ["https://example.com", "--probe-endpoints"])
 
+    def test_full_site_crawl_is_bounded_and_has_no_output_path_argument(self):
+        self.assertIn("unlighthouse_run.py", mcp_server.SAFE_SCRIPTS)
+        argv = mcp_server.build_crawl_argv("https://example.com", max_routes=5)
+        self.assertIn("--max-routes", argv)
+        self.assertNotIn("unlighthouse_run.py", mcp_server.ANALYSIS_SCRIPTS)
+
+    def test_full_site_crawl_rejects_unbounded_and_arbitrary_arguments(self):
+        for args in (
+            {"target": "https://example.com", "max_routes": 51},
+            {"target": "https://example.com", "max_routes": True},
+        ):
+            with self.subTest(args=args), self.assertRaises(ValueError):
+                mcp_server.build_crawl_argv(args.get("target"), max_routes=args.get("max_routes", 20))
+        with self.assertRaises(ValueError):
+            mcp_server.run_tool("seo_crawl", {"target": "https://example.com", "output_dir": "C:/private"})
+        with self.assertRaises(ValueError):
+            mcp_server.run_tool("seo_analyze", {"script": "unlighthouse_run.py", "arguments": ["https://example.com"]})
+
+    def test_crawl_output_does_not_expose_temp_report_paths(self):
+        payload = '{"ok":true,"output_dir":"C:/Users/name/AppData/Local/Temp/report","route_count":1,"stdout_tail":"local path","aggregate_scores":{}}'
+        with patch.object(mcp_server.subprocess, "run", return_value=SimpleNamespace(stdout=payload, stderr="", returncode=0)):
+            output, failed = mcp_server.run_tool("seo_crawl", {"target": "https://example.com", "max_routes": 1})
+        self.assertFalse(failed)
+        self.assertNotIn("C:/Users", output)
+        self.assertNotIn("local path", output)
+
     def test_invalid_tool_arguments_return_invalid_params(self):
         reply = mcp_server.handle(
             {"jsonrpc": "2.0", "id": 4, "method": "tools/call", "params": {"name": "seo_doctor", "arguments": []}}
@@ -65,7 +93,7 @@ class McpServerTests(unittest.TestCase):
         )
         messages = [json.loads(line) for line in result.stdout.splitlines()]
         self.assertEqual(messages[0]["result"]["serverInfo"]["name"], "codex-seo-local")
-        self.assertEqual({tool["name"] for tool in messages[1]["result"]["tools"]}, {"seo_doctor", "seo_setup", "seo_analyze"})
+        self.assertEqual({tool["name"] for tool in messages[1]["result"]["tools"]}, {"seo_doctor", "seo_setup", "seo_analyze", "seo_crawl"})
 
 
 if __name__ == "__main__":

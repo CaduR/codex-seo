@@ -58,7 +58,7 @@ Only 11% of domains are cited by both ChatGPT and Google AI Overviews, so platfo
 
 ## DataForSEO Integration (Optional)
 
-If DataForSEO MCP tools are available, use `ai_optimization_chat_gpt_scraper` for live ChatGPT visibility and `ai_opt_llm_ment_search` for LLM mention tracking.
+If the `dataforseo` MCP is connected, use the `seo-dataforseo` workflow to resolve the current v3 endpoint with `docs_search`, show the cost estimate, and call `api_request` only after user approval.
 
 ## Output Format
 

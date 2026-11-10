@@ -255,7 +255,7 @@
 <li>Develop unique tools or calculators</li>
 </ol>
 <h2>DataForSEO Integration (Optional)</h2>
-<p>If DataForSEO MCP tools are available, use <code>ai_optimization_chat_gpt_scraper</code> to check what ChatGPT web search returns for target queries (real GEO visibility check) and <code>ai_opt_llm_ment_search</code> with <code>ai_opt_llm_ment_top_domains</code> for LLM mention tracking across AI platforms.</p>
+<p>If the <code>dataforseo</code> MCP is connected, use the <code>seo-dataforseo</code> workflow to resolve the current v3 endpoint with <code>docs_search</code>, show the cost estimate, and call <code>api_request</code> only after user approval.</p>
 <h2>Error Handling</h2>
 <table><thead><tr><th>Scenario</th><th>Action</th></tr></thead><tbody>
 <tr><td>URL unreachable (DNS failure, connection refused)</td><td>Report the error clearly. Do not guess site content. Suggest the user verify the URL and try again.</td></tr>

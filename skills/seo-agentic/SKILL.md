@@ -168,7 +168,7 @@ version changes, and the `CHECKED_ON` constant in `agentic_check.py` together.
 
 | Scenario | Action |
 |---|---|
-| PSI quota exceeded or no compatible runner | Continue with the available static checks and say the Lighthouse fraction was not measured. Do not claim a PSI call ran. |
+| PSI quota exceeded or no compatible Agentic Browsing runner | Continue with static checks and `seo_crawl` where the user explicitly requested a multi-page Lighthouse scan. State that the Agentic Browsing category fraction was not measured; `seo_crawl` does not provide that category. |
 | Agent-UX `score_status: unavailable` (no Chromium) | Report the heuristic as unavailable. Offer `seo_setup` for the optional Chromium runtime only if the user asks; this does not add the Lighthouse Agentic Browsing runner. |
 | Static WebMCP count differs from Lighthouse | `registerTool_call_sites` counts call sites, not tools. Report the Lighthouse `webmcp-registered-tools` list as the tool count. |
 | No agentic-browsing category in a saved report | The report predates Lighthouse 13.2; rerun with a current version. |

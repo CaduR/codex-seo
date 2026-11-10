@@ -12,7 +12,7 @@ class PackageTests(unittest.TestCase):
         manifest = json.loads((ROOT / "plugin.json").read_text(encoding="utf-8"))
         mcp = json.loads((ROOT / "mcp.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], "codex-seo")
-        self.assertEqual(manifest["version"], "0.3.0")
+        self.assertEqual(manifest["version"], "0.4.0")
         self.assertTrue(manifest["extensions"]["com.openai"]["requires_local_executor"])
         server = mcp["mcpServers"]["codex-seo-local"]
         self.assertEqual(server["type"], "stdio")

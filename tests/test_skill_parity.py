@@ -27,6 +27,15 @@ class SkillParityTests(unittest.TestCase):
         self.assertIn("reference cards", audit)
         self.assertIn("inline", audit)
 
+    def test_dataforseo_workflow_targets_current_v3_mcp_without_static_prices(self):
+        skill = (ROOT / "skills" / "seo-dataforseo" / "SKILL.md").read_text(encoding="utf-8-sig")
+        costs = (ROOT / "skills" / "seo-dataforseo" / "references" / "cost-tiers.md").read_text(encoding="utf-8-sig")
+        self.assertIn("https://mcp.dataforseo.com/v3/mcp", skill)
+        self.assertIn("docs_search", skill)
+        self.assertIn("api_request", skill)
+        self.assertNotRegex(skill, r"\b(?:serp_organic_live_advanced|backlinks_summary|kw_data_google_ads_search_volume)\b")
+        self.assertNotRegex(costs, r"\$\d+(?:\.\d+)?")
+
 
 if __name__ == "__main__":
     unittest.main()

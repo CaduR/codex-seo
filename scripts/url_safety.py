@@ -251,7 +251,8 @@ def is_safe_ip(ip_str: str) -> bool:
 #     link-local, 100.100.100.200 sits inside the Tailscale range this
 #     allowlist exists to permit, and fd00:ec2::254 is unique-local rather
 #     than link-local, so no single address predicate catches all three.
-_LOCAL_TARGETS_ENV = "CLAUDE_SEO_LOCAL_TARGETS"
+_LOCAL_TARGETS_ENV = "CODEX_SEO_LOCAL_TARGETS"
+_LEGACY_LOCAL_TARGETS_ENV = "CLAUDE_SEO_LOCAL_TARGETS"
 
 
 # Hostnames and literals no allowlist entry can ever unblock.
@@ -332,7 +333,7 @@ def _local_targets() -> tuple[tuple[str, Optional[int]], ...]:
     configuration, and a cached empty tuple from import time would make the
     setting silently inert in a long-lived process.
     """
-    raw = os.environ.get(_LOCAL_TARGETS_ENV, "")
+    raw = os.environ.get(_LOCAL_TARGETS_ENV, os.environ.get(_LEGACY_LOCAL_TARGETS_ENV, ""))
     if not raw.strip():
         return ()
     parsed = (_parse_local_target(part) for part in raw.split(","))
@@ -527,7 +528,7 @@ def validate_url_strict(url: str) -> tuple[str, str]:
         if is_safe_ip(ip_str):
             continue
         if allowlisted and _is_allowlistable_ip(ip_str):
-            continue  # Named in CLAUDE_SEO_LOCAL_TARGETS; see that block.
+            continue  # Named in CODEX_SEO_LOCAL_TARGETS; see that block.
         raise URLSafetyError(
             f"DNS rebinding refused: {hostname} resolves to "
             f"non-public IP {ip_str}"

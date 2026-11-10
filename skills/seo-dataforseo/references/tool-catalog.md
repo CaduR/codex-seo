@@ -1,58 +1,36 @@
-# DataForSEO MCP Tool Catalog
+# DataForSEO v3 API endpoint guide
 
-> Load this reference when you need to find a specific DataForSEO MCP tool
-> that is not covered by the main SKILL.md commands. These are utility tools
-> available for internal use but without dedicated `/seo dataforseo` commands.
+The current official server exposes documentation tools and one generic request tool; it does not expose one MCP tool per endpoint.
 
-## SERP Utilities
+## Tool flow
 
-- `serp_locations`: Location code lookups for SERP queries
-- `serp_youtube_locations`: Location code lookups for YouTube queries
+1. `docs_list_sections` or `docs_index` to find the relevant API family.
+2. `docs_search` for the current endpoint's required fields, method, prices, queue, limits, and response schema.
+3. After the user approves the estimate, call `api_request` with `method`, `path`, and `data` as a JSON array containing one task object.
 
-## Keyword Data Utilities
+The server defaults to its `.ai` response format. That format may omit fields such as actual `cost`. Set `noAiMode: true` only when the raw response or actual cost field is required. Do not mistake a post-request actual cost for a pre-request estimate.
 
-- `kw_data_google_ads_locations`: Location lookups for keyword data
-- `kw_data_dfs_trends_demography`: Demographic data for trend analysis
-- `kw_data_dfs_trends_subregion_interests`: Subregion interest data for trends
-- `kw_data_dfs_trends_explore`: DFS proprietary trends data
-- `kw_data_google_trends_categories`: Google Trends category lookups
+## Common endpoint families
 
-## DataForSEO Labs Utilities
+| Workflow | v3 endpoint family |
+|---|---|
+| Organic, images, Maps, news, YouTube SERPs | `/v3/serp/{engine}/...` |
+| Keyword volume and trends | `/v3/keywords_data/{source}/...` |
+| Keyword ideas, rankings, competitors, intersections | `/v3/dataforseo_labs/{source}/...` |
+| Backlink summaries, links, anchors, referring domains | `/v3/backlinks/...` |
+| On-page parsing, instant checks, Lighthouse | `/v3/on_page/...` |
+| Domain technology and WHOIS | `/v3/domain_analytics/...` |
+| Business listings and reviews | `/v3/business_data/...` |
+| Content search, summaries, phrase trends | `/v3/content_analysis/...` |
+| AI visibility, LLM responses and mentions | `/v3/ai_optimization/...` |
+| Shopping and marketplace data | `/v3/merchant/...` |
 
-- `dataforseo_labs_google_keyword_overview`: Quick keyword metrics overview
-- `dataforseo_labs_google_historical_serp`: Historical SERP results for a keyword
-- `dataforseo_labs_google_serp_competitors`: Competitors for a specific SERP
-- `dataforseo_labs_google_keywords_for_site`: Keywords a site ranks for (alternative to ranked)
-- `dataforseo_labs_google_page_intersection`: Page-level intersection analysis
-- `dataforseo_labs_google_historical_rank_overview`: Historical domain rank data
-- `dataforseo_labs_google_historical_keyword_data`: Historical keyword metrics
-- `dataforseo_labs_available_filters`: Available filter options for Labs endpoints
+These are families, not complete paths. Confirm every path and body through `docs_search`; DataForSEO can change endpoints and pricing.
 
-## Backlinks Utilities
+## Verified examples
 
-- `backlinks_competitors`: Find domains with similar backlink profiles
-- `backlinks_bulk_backlinks`: Bulk backlink counts for multiple targets
-- `backlinks_bulk_new_lost_referring_domains`: Bulk new/lost referring domains
-- `backlinks_bulk_new_lost_backlinks`: Bulk new/lost backlinks
-- `backlinks_bulk_ranks`: Bulk rank overview for multiple targets
-- `backlinks_bulk_referring_domains`: Bulk referring domain counts
-- `backlinks_domain_pages_summary`: Summary of pages on a domain
-- `backlinks_domain_pages`: List pages on a domain with backlink data
-- `backlinks_page_intersection`: Shared backlink sources at page level
-- `backlinks_referring_networks`: Referring network analysis
-- `backlinks_timeseries_new_lost_summary`: Track new/lost backlinks over time
-- `backlinks_bulk_pages_summary`: Bulk page summaries
-- `backlinks_available_filters`: Available filter options for Backlinks endpoints
+- Google organic SERP: `POST /v3/serp/google/organic/live/regular`
+- Google Images SERP: resolve the current `google/images/live` endpoint using `docs_search`
+- Backlink summary: `POST /v3/backlinks/summary/live`
 
-## Domain Analytics Utilities
-
-- `domain_analytics_whois_available_filters`: WHOIS filter options
-- `domain_analytics_technologies_available_filters`: Technology detection filter options
-
-## AI Optimization Utilities
-
-- `ai_opt_kw_data_loc_and_lang`: AI optimization keyword data locations/languages
-- `ai_optimization_keyword_data_search_volume`: AI-specific keyword volume data
-- `ai_optimization_llm_response`: Direct LLM response analysis
-- `ai_optimization_llm_mentions_filters`: Available filters for LLM mentions
-- `ai_optimization_chat_gpt_scraper_locations`: Available locations for ChatGPT scraper
+Use the market-specific location and language codes. The examples in this file are endpoint patterns; they are not approval to make a paid API request.

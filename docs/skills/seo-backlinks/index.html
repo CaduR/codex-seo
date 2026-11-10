@@ -25,7 +25,7 @@
 <h2>Analysis Framework</h2>
 <p>Produce all 7 sections below. Each section lists data sources in preference order.</p>
 <h3>1. Profile Overview</h3>
-<p><strong>DataForSEO:</strong> <code>backlinks_summary</code> → total backlinks, referring domains, domain rank, follow ratio, trend.</p>
+<p><strong>DataForSEO:</strong> <code>api_request</code> → total backlinks, referring domains, domain rank, follow ratio, trend.</p>
 <p><strong>Moz API:</strong> <code>moz_api.py</code> (not available through the default Codex MCP) → Domain Authority, Page Authority, Spam Score, linking root domains, external links.</p>
 <p><strong>Keywords Everywhere:</strong> <code>keywordseverywhere_api.py</code> (not available through the default Codex MCP) → 0-10 Open PageRank (<code>open_page_rank</code>), a global <code>rank</code>, and a referring-domain count (<code>referring_domains</code>), per the current API; no anchors or individual links. Use as a fallback when Moz isn&#x27;t configured; do not use in place of Moz when both are available.</p>
 <p><strong>Common Crawl:</strong> <code>commoncrawl_graph.py</code> (not available through the default Codex MCP) → PageRank, harmonic centrality, and low-confidence rank/presence data.</p>
@@ -37,7 +37,7 @@
 <tr><td>Trend</td><td>Growing or stable</td><td>Slow decline</td><td>Rapid decline (&gt;20%/quarter)</td></tr>
 </tbody></table>
 <h3>2. Anchor Text Distribution</h3>
-<p><strong>DataForSEO:</strong> <code>backlinks_anchors</code></p>
+<p><strong>DataForSEO:</strong> <code>api_request</code></p>
 <p><strong>Moz API:</strong> <code>moz_api.py</code> (not available through the default Codex MCP)</p>
 <p><strong>Bing Webmaster:</strong> <code>bing_webmaster.py</code> (not available through the default Codex MCP) (extract anchor text from link details)</p>
 <p><strong>Healthy distribution benchmarks:</strong></p>
@@ -51,7 +51,7 @@
 </tbody></table>
 <p>Flag if exact-match anchors exceed 15% as a review heuristic; it may indicate unnatural or link-spam patterns.</p>
 <h3>3. Referring Domain Quality</h3>
-<p><strong>DataForSEO:</strong> <code>backlinks_referring_domains</code></p>
+<p><strong>DataForSEO:</strong> <code>api_request</code></p>
 <p><strong>Moz API:</strong> <code>moz_api.py</code> (not available through the default Codex MCP) → domains with DA scores</p>
 <p><strong>Common Crawl:</strong> <code>commoncrawl_graph.py</code> (not available through the default Codex MCP) → domain-level rank/presence data, no verified referring-domain counts</p>
 <p>Analyze:</p>
@@ -62,7 +62,7 @@
 <li><strong>Follow/nofollow per domain</strong>: Sites that only nofollow = limited SEO value</li>
 </ul>
 <h3>4. Toxic Link Detection</h3>
-<p><strong>DataForSEO:</strong> <code>backlinks_bulk_spam_score</code> + toxic patterns from reference</p>
+<p><strong>DataForSEO:</strong> <code>api_request</code> + toxic patterns from reference</p>
 <p><strong>Moz API:</strong> Raw vendor spam_score from <code>moz_api.py</code> (not available through the default Codex MCP) (source-label the value; apply thresholds only if verified against current Moz docs)</p>
 <p><strong>Verification Crawler:</strong> <code>verify_backlinks.py</code> (not available through the default Codex MCP) (verify suspicious links still exist)</p>
 <p><strong>High-risk indicators (flag immediately):</strong></p>
@@ -83,7 +83,7 @@
 </ul>
 <p>Load <code>../seo/references/backlink-quality.md</code> for the full 30 toxic patterns and disavow criteria.</p>
 <h3>5. Top Pages by Backlinks</h3>
-<p><strong>DataForSEO:</strong> <code>backlinks_backlinks</code> with target type &quot;page&quot;</p>
+<p><strong>DataForSEO:</strong> <code>api_request</code> with target type &quot;page&quot;</p>
 <p><strong>Moz API:</strong> <code>moz_api.py</code> (not available through the default Codex MCP)</p>
 <p>Find:</p>
 <ul>
@@ -93,7 +93,7 @@
 <li>404 pages with backlinks (redirect opportunities to reclaim link equity)</li>
 </ul>
 <h3>6. Competitor Gap Analysis</h3>
-<p><strong>DataForSEO:</strong> <code>backlinks_referring_domains</code> for both domains, then compare</p>
+<p><strong>DataForSEO:</strong> <code>api_request</code> for both domains, then compare</p>
 <p><strong>Bing Webmaster:</strong> <code>bing_webmaster.py</code> (not available through the default Codex MCP) only when both properties are registered and accessible to the same Bing API account. For arbitrary competitors, use DataForSEO, Moz, or Common Crawl.</p>
 <p><strong>Moz API:</strong> Compare DA/PA between domains via <code>moz_api.py</code> (not available through the default Codex MCP) for each</p>
 <p>Output:</p>
@@ -104,7 +104,7 @@
 <li>Top 20 link building opportunities with domain authority</li>
 </ul>
 <h3>7. New and Lost Backlinks</h3>
-<p><strong>DataForSEO only:</strong> <code>backlinks_backlinks</code> with date filters for 30/60/90 day changes</p>
+<p><strong>DataForSEO only:</strong> <code>api_request</code> with date filters for 30/60/90 day changes</p>
 <p><strong>Verification Crawler:</strong> Current backlink status is not checked by the default MCP. Use only provider output or a link list reviewed with an available page-fetch tool.</p>
 <p><strong>Note:</strong> Free sources cannot track new/lost links over time. If this section is requested without a connected backlink provider, state that link-velocity data is unavailable. User-supplied exports provide point-in-time snapshots only.</p>
 <p><strong>Red flags:</strong></p>

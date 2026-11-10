@@ -4,7 +4,7 @@
 <a href="https://cadur.github.io/codex-seo/">Browse the site</a> · <a href="#install">Install</a> · <a href="#capabilities">Capabilities</a> · <a href="docs/EXTENSIONS.md">Optional extensions</a> · <a href="#privacy-and-costs">Privacy and costs</a>
 </div>
 
-Codex SEO brings the Claude SEO workflow catalog to Codex and adds a local MCP runtime for selected read-only analyses. It includes 26 skills, 19 specialist role cards, 60 reusable analysis scripts, detailed skill pages, and tools for fetching and inspecting public pages.
+Codex SEO brings the Claude SEO workflow catalog to Codex and adds a local MCP runtime for selected read-only analyses. It includes 26 skills, 19 specialist role cards, 63 reusable analysis scripts, detailed skill pages, and tools for inspecting public pages and running a bounded multi-page Lighthouse crawl.
 
 This is a Codex adaptation, not a claim that every Claude Code interface has a one-to-one Codex equivalent. Codex skills replace slash commands; a local MCP server exposes the executable analysis scripts. Specialist roles are expressed through workflow instructions and Codex's available delegation features.
 
