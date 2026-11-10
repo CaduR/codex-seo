@@ -1,10 +1,12 @@
 ---
 name: seo-content
-description: Evaluate content quality, usefulness, topical coverage, and trust signals, or create an evidence-led SEO content brief. Use for content audits, briefs, and editorial improvements.
+description: Evaluate content usefulness, topical coverage, trust signals, and editorial quality. Use for E-E-A-T reviews, thin-content concerns, and content improvement requests.
 ---
 
-# Content quality and briefs
+# Content quality review
 
-Assess whether the content directly satisfies its audience and intent, provides useful specifics, demonstrates relevant experience or expertise, and makes important claims verifiable. Look for missing subtopics, vague passages, duplication, stale facts, unsupported claims, and unclear authorship where relevant.
+Assess whether the content directly serves its audience and intent, includes specific and useful information, shows relevant experience or expertise, and makes important claims verifiable. Look for missing subtopics, vague passages, duplication, stale facts, unsupported claims, unclear authorship, and readability issues where relevant.
 
-For a brief, define audience, intent, primary question, supporting questions, recommended structure, evidence to gather, internal-link opportunities, and conversion action. Treat E-E-A-T as quality guidance, not a measurable Google score. Do not fabricate research, credentials, quotations, or sources. Distinguish observed shortcomings from proposed editorial choices.
+Treat E-E-A-T as quality guidance, not a measurable Google score or a direct ranking guarantee. Do not fabricate research, credentials, quotations, or sources. Distinguish observations in the supplied page from editorial recommendations.
+
+Return the strongest content issues first, with page evidence, audience impact, and a concrete revision direction. When the user asks for a structured pre-writing plan, route to the separate `seo-content-brief` skill. For current factual claims, use authoritative sources and identify what still needs a subject-matter review.
